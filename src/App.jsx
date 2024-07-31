@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import OpenAI from "openai";
 import ApiKeyInput from "./components/ApiKeyInput";
 import AudioUploader from "./components/AudioUploader";
 import TranscriptionDisplay from "./components/TranscriptionDisplay";
+import AudioPlayer from "./components/AudioPlayer";
 
 function App() {
   const [apiKey, setApiKey] = useState("");
   const [audioFile, setAudioFile] = useState(null);
   const [transcription, setTranscription] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [language, setLanguage] = useState("");
 
   const handleTranscription = async () => {
     if (!audioFile || !apiKey) {
@@ -44,6 +44,7 @@ function App() {
       >
         {isLoading ? "Transcribing..." : "Transcribe Audio"}
       </button>
+      <AudioPlayer audioFile={audioFile} />
       <TranscriptionDisplay transcription={transcription} />
     </div>
   );
